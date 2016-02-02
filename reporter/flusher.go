@@ -46,6 +46,7 @@ func (a *Flusher) Start() hitman.KillChannel {
 
 func (a *Flusher) flush(pt *flux.Point, k int) {
 	//	fmt.Println("flushing data points to influx", k)
+	return
 	name := pt.Name()
 	tags := pt.Tags()
 	fields := pt.Fields()

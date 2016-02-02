@@ -49,8 +49,12 @@ func (a *Reporter) Start() hitman.KillChannel {
 				cleaner.WaitGroup.Done()
 				fmt.Println("Closing reporter")
 				return
-			case pt := <-a.points:
-				a.batch.AddPoint(pt)
+			case p1 := <-a.points:
+				a.batch.AddPoint(p1)
+				n := len(a.points)
+				for i := 0; i < n; i++ {
+					a.batch.AddPoint(<-a.points)
+				}
 			case <-tic:
 				now := time.Now().UnixNano()
 				diff := now - last
